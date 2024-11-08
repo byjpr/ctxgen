@@ -1,4 +1,4 @@
-# rag
+# ctxgen
 
 To install dependencies:
 
