@@ -39,17 +39,25 @@ async function getContextFileContents(fileNames: string[]): Promise<ContextConte
   return contents;
 }
 
+function convertToSystemCommands(contextContents: ContextContents): Command[] {
+  return Object.entries(contextContents).map(([key, value]) => ({
+    role: "system",
+    content: `<context_${key}>${value}</context_${key}>`,
+    cache_control: {"type": "ephemeral"}
+  }));
+}
+
 // Updated `queryAI` function using Anthropic SDK
 async function queryAI(task: Task, contextContent: ContextContents): Promise<string> {
+  const system_context = convertToSystemCommands(contextContent)
   const response = await client.messages.create({
-    model: MODEL, // Specify the model, e.g., "claude-2"
-    system: [],
+    model: MODEL,
+    system: [...system_context],
     messages: task.commands
   });
 
   return response.content;
 }
-
 
 export async function processTasks(tasks: Task[]): Promise<void> {
   const fileStatus: Record<string, "processing" | "done" | undefined> = {};
