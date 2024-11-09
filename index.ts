@@ -1,8 +1,10 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 
+import Anthropic from "@anthropic-ai/sdk";
+
 type Command = {
-  type: "system" | "user";
+  role: "system" | "user";
   message: string;
 };
 
@@ -10,13 +12,19 @@ type Task = {
   context: string[];
   type: "new" | "update";
   name: string;
-  commands: Command[];
+  commands: Array<Command[]>;
 };
 
 type ContextContents = Record<string, string>;
 
-const API_ENDPOINT = "https://abstractapi.example.com/ai-query";
 const BASE_DIR = "./example";
+const API_KEY = process.env.ANTHROPIC_API_KEY || "";
+const MODEL = process.env.ANTHROPIC_MODEL || "claude-3-opus-20240229";
+
+// Initialize the Anthropic client
+const client = new Anthropic({
+  apiKey: API_KEY, // This is the default and can be omitted
+});
 
 async function getContextFileContents(fileNames: string[]): Promise<ContextContents> {
   const contents: ContextContents = {};
@@ -31,18 +39,17 @@ async function getContextFileContents(fileNames: string[]): Promise<ContextConte
   return contents;
 }
 
+// Updated `queryAI` function using Anthropic SDK
 async function queryAI(task: Task, contextContent: ContextContents): Promise<string> {
-  const response = await fetch(API_ENDPOINT, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      context: contextContent,
-      commands: task.commands,
-    }),
+  const response = await client.messages.create({
+    model: MODEL, // Specify the model, e.g., "claude-2"
+    system: [],
+    messages: task.commands
   });
-  const data = await response.json();
-  return data.result;
+
+  return response.content;
 }
+
 
 export async function processTasks(tasks: Task[]): Promise<void> {
   const fileStatus: Record<string, "processing" | "done" | undefined> = {};
