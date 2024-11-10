@@ -65,11 +65,16 @@ function convertToSystemCommands(contextContents: ContextContents): Command[] {
  * @returns A promise that resolves to the AI's response as a string.
  */
 async function queryAI(task: Task, contextContent: ContextContents): Promise<string> {
-  const system_context = convertToSystemCommands(contextContent)
+  const system_context = convertToSystemCommands(contextContent);
+
+  // Split commands by role
+  const system_commands = task.commands.flat().filter(cmd => cmd.role === "system");
+  const user_commands = task.commands.flat().filter(cmd => cmd.role === "user");
+
   const response = await client.messages.create({
     model: MODEL,
-    system: [...system_context],
-    messages: task.commands
+    system: [...system_commands, ...system_context],
+    messages: user_commands
   });
 
   return response.content;
