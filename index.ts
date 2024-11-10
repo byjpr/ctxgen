@@ -26,6 +26,12 @@ const client = new Anthropic({
   apiKey: API_KEY, // This is the default and can be omitted
 });
 
+/**
+ * Reads the contents of specified files and returns them as an object.
+ * @param fileNames - An array of file names to read.
+ * @returns A promise that resolves to an object containing file contents.
+ * @throws Error if a required file does not exist.
+ */
 async function getContextFileContents(fileNames: string[]): Promise<ContextContents> {
   const contents: ContextContents = {};
   for (const file of fileNames) {
@@ -39,6 +45,11 @@ async function getContextFileContents(fileNames: string[]): Promise<ContextConte
   return contents;
 }
 
+/**
+ * Converts context contents to system commands for the AI.
+ * @param contextContents - An object containing context file contents.
+ * @returns An array of Command objects formatted for the AI system.
+ */
 function convertToSystemCommands(contextContents: ContextContents): Command[] {
   return Object.entries(contextContents).map(([key, value]) => ({
     role: "system",
@@ -47,7 +58,12 @@ function convertToSystemCommands(contextContents: ContextContents): Command[] {
   }));
 }
 
-// Updated `queryAI` function using Anthropic SDK
+/**
+ * Queries the AI model using the Anthropic SDK.
+ * @param task - The task object containing commands for the AI.
+ * @param contextContent - The context content for the AI query.
+ * @returns A promise that resolves to the AI's response as a string.
+ */
 async function queryAI(task: Task, contextContent: ContextContents): Promise<string> {
   const system_context = convertToSystemCommands(contextContent)
   const response = await client.messages.create({
@@ -59,6 +75,12 @@ async function queryAI(task: Task, contextContent: ContextContents): Promise<str
   return response.content;
 }
 
+/**
+ * Processes a list of tasks, handling dependencies and file operations.
+ * @param tasks - An array of Task objects to process.
+ * @returns A promise that resolves when all tasks are processed.
+ * @throws Error if a required file or dependency is missing.
+ */
 export async function processTasks(tasks: Task[]): Promise<void> {
   const fileStatus: Record<string, "processing" | "done" | undefined> = {};
 
