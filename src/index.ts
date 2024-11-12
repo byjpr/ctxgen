@@ -16,7 +16,7 @@ export async function processTasks(tasks: Task[]): Promise<void> {
     taskQueue.addTask(task);
   }
 
-  const beforeFunction = async (task: Task): Promise<Task> => {
+  const callBeforeFunction = async (task: Task): Promise<Task> => {
     if (typeof task.before === 'function') {
       return task.before(task);
     }
@@ -25,7 +25,7 @@ export async function processTasks(tasks: Task[]): Promise<void> {
 
   await taskQueue.run(async (task: Task) => {
     try {
-      task = await beforeFunction(task);
+      task = await callBeforeFunction(task);
 
       const contextContent = await getContextFileContents(task.context);
       const result = await aiClient.queryAI(task, contextContent);
