@@ -8,6 +8,7 @@ export type Task = {
   type: "new" | "update";
   name: string;
   commands: Array<Command[]>;
+  before: Function;
 };
 
 export type ContextContents = Record<string, string>;
