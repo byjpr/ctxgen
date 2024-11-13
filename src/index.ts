@@ -16,17 +16,8 @@ export async function processTasks(tasks: Task[]): Promise<void> {
     taskQueue.addTask(task);
   }
 
-  const maybeCallBeforeFunction = async (task: Task): Promise<Task> => {
-    if (typeof task.before === 'function') {
-      return task.before(task);
-    }
-    return task;
-  };
-
   await taskQueue.run(async (task: Task) => {
     try {
-      task = await maybeCallBeforeFunction(task);
-
       const contextContent = await getContextFileContents(task.context);
       const result = await aiClient.queryAI(task, contextContent);
       await writeOutputFile(task.name, result);

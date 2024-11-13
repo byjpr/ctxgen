@@ -11,6 +11,13 @@ export class TaskQueue {
     this.queue.push(task);
   }
 
+  private async maybeCallBeforeFunction(task: Task): Promise<Task> {
+    if (typeof task.before === 'function') {
+      return task.before(task);
+    }
+    return task;
+  }
+
   async run(processTask: (task: Task) => Promise<void>) {
     while (this.queue.length > 0) {
       const readyTasks = this.queue.filter(task =>
@@ -20,6 +27,7 @@ export class TaskQueue {
         this.running.add(task.name);
         logger.info(`Starting task: ${task.name}`);
         try {
+          task = await this.maybeCallBeforeFunction(task);
           await processTask(task);
           this.completed.add(task.name);
           logger.info(`Completed task: ${task.name}`);
