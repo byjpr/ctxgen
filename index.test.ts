@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from "bun:test";
-import { processTasks } from "./index"; // Update to your actual script path
+import { processTasks } from "./src/index"; // Update to your actual script path
 
 // Mock `fs/promises` functions
 const originalReadFile = Bun.readFile;
