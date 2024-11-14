@@ -1,7 +1,12 @@
 // logger.ts
 import winston from 'winston';
 
-const logger = winston.createLogger({
+export interface Logger {
+  info: (message: string) => void;
+  error: (message: string) => void;
+}
+
+const logger: Logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
     winston.format.timestamp(),
