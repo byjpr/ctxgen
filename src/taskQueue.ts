@@ -1,6 +1,6 @@
 // taskQueue.ts
 import type { Task } from './types';
-import logger from './logger';
+import type { Logger } from './logger';
 
 export class TaskQueue {
   private queue: Task[] = [];
@@ -9,7 +9,7 @@ export class TaskQueue {
   private logger: Logger;
 
   constructor(logger: Logger) {
-    this.logger = logger;
+    this.logger = logger;1
   }
 
   addTask(task: Task) {
