@@ -9,7 +9,7 @@ export class TaskQueue {
   private logger: Logger;
 
   constructor(logger: Logger) {
-    this.logger = logger;1
+    this.logger = logger;
   }
 
   addTask(task: Task) {
