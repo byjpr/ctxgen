@@ -1,12 +1,12 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
-import { BASE_DIR } from "./config";
+import config from "./config";
 import type { ContextContents } from "./types";
 
 export async function getContextFileContents(fileNames: string[]): Promise<ContextContents> {
   const contents: ContextContents = {};
   for (const file of fileNames) {
-    const filePath = join(BASE_DIR, file);
+    const filePath = join(config.BASE_DIR, file);
     try {
       contents[file] = await readFile(filePath, "utf8");
     } catch (error) {
@@ -17,6 +17,6 @@ export async function getContextFileContents(fileNames: string[]): Promise<Conte
 }
 
 export async function writeOutputFile(fileName: string, content: string): Promise<void> {
-  const outputPath = join(BASE_DIR, fileName);
+  const outputPath = join(config.BASE_DIR, fileName);
   await writeFile(outputPath, content, "utf8");
 }
