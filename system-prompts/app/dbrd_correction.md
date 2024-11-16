@@ -1,0 +1,3 @@
+Does this only relate to the information provided in the feature-requirements-doc and product-requirements-document ? Please tell me if any of the information is unrelated and added additionally.
+
+Please think slowly, and rewrite the DRD to only meet the requirements specified in the PRD and FRD. If you come close to output token limit and you still need to write more end 500 tokens early and append "<<< CONTINUE?" after all other rules previously provided have been executed.
