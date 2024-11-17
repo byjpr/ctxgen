@@ -8,7 +8,7 @@ import logger from "./logger";
 import { FileNotFoundError, DependencyError, AIQueryError } from "./errors";
 
 export async function processTasks(tasks: Task[]): Promise<void> {
-  const taskQueue = new TaskQueue();
+  const taskQueue = new TaskQueue(logger);
   const aiClient = new AIClient(config.ANTHROPIC_API_KEY);
 
   // Add tasks to the queue

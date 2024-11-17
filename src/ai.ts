@@ -9,6 +9,10 @@ export class AIClient {
     this.client = new Anthropic({ apiKey });
   }
 
+  private defaultBridge(obj) {
+    return this.client.messages.create(obj);
+  }
+
   private convertToSystemCommands(contextContents: ContextContents) {
     return Object.entries(contextContents).map(([key, value]) => ({
       role: "system",
@@ -17,17 +21,17 @@ export class AIClient {
     }));
   }
 
-  async queryAI(task: Task, contextContent: ContextContents): Promise<string> {
+  async queryAI(task: Task, contextContent: ContextContents, ai = this.defaultBridge): Promise<string> {
     const system_context = this.convertToSystemCommands(contextContent);
-    const system_commands = task.commands.flat().filter(cmd => cmd.role === "system");
+    const system_command = task.commands.flat().filter(cmd => cmd.role === "system").join();
     const user_commands = task.commands.flat().filter(cmd => cmd.role === "user");
 
-    const response = await this.client.messages.create({
+    const response = await ai({
       model: config.ANTHROPIC_MODEL,
-      system: [...system_commands, ...system_context],
-      messages: user_commands
-    });
+      system: system_command,
+      messages: [...system_context, user_commands]
+    });§
 
-    return response.content;
+    return response;
   }
 }

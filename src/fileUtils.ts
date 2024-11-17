@@ -17,6 +17,6 @@ export async function getContextFileContents(fileNames: string[]): Promise<Conte
 }
 
 export async function writeOutputFile(fileName: string, content: string): Promise<void> {
-  const outputPath = join(config.BASE_DIR, fileName);
+  const outputPath = join(config.OUTPUT_DIR, fileName);
   await writeFile(outputPath, content, "utf8");
 }
