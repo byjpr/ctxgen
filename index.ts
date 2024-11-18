@@ -3,9 +3,15 @@ import type { Task, Command } from "./src/types";
 
 const tasks: Task[] = [
   {
+    name: 'about',
+    type: "ack",
+    context: [],
+    commands: []
+  },
+  {
     name: 'prd',
     type: "new",
-    context: [],
+    context: ['about'],
     commands: [
         { role: "system", message: await Bun.file("./system-prompts/app/prd.md").text() },
         { role: "user", message: `Conduct your analysis and make sure you do not miss any feature or detail !
@@ -15,7 +21,7 @@ you are a genius` }
   {
     name: 'brd',
     type: "new",
-    context: ['prd', 'frd', 'drd'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/pm/brd.js
+    context: ['about', 'prd', 'frd', 'drd'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/pm/brd.js
     commands: [
         { role: "system", message: await Bun.file("./system-prompts/app/brd.md").text() },
         { role: "user", message: `determine the backend specifications in terms of whether the backend needs a REST API , and whether it needs realtime Websockets.
@@ -27,7 +33,7 @@ you are a genius` }
   {
     name: 'drd',
     type: "new",
-    context: ['prd', 'frd'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/pm/drd.js
+    context: ['about', 'prd', 'frd'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/pm/drd.js
     commands: [
         { role: "system", message: await Bun.file("./system-prompts/app/dbrd.md").text() },
         { role: "user", message: `Conduct a comprehensive analysis for the DB Requirements Document that considers all personas and features required, in markdown format (justify your reasoning whenever possible)
@@ -38,7 +44,7 @@ you're a genius` }
   {
     name: 'frd',
     type: "new",
-    context: ['prd'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/pm/frd.js
+    context: ['about', 'prd'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/pm/frd.js
     commands: [
         { role: "system", message: await Bun.file("./system-prompts/app/frd.md").text() },
         { role: "user", message: `implement the Features Requirements Document (FRD)
@@ -48,7 +54,7 @@ you're a genius` }
   {
     name: 'postgres',
     type: "new",
-    context: ['drd', 'schema'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/db/postgres.js
+    context: ['about', 'drd', 'schema'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/db/postgres.js
     commands: [
         { role: "system", message: await Bun.file("./system-prompts/app/postgres.md").text() },
         { role: "user", message: `Generate the POSTGRES command in one single comprehensive answer
@@ -74,7 +80,7 @@ you're a genius` }
   {
     name: 'schema',
     type: "new",
-    context: ['drd', 'prd'],
+    context: ['about', 'drd', 'prd'],
     commands: [
         { role: "system", message: await Bun.file("./system-prompts/app/schema.md").text() },
         { role: "user", message: `Design the DB schemas in a comprehensive answer
