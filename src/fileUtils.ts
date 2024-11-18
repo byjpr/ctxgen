@@ -1,9 +1,19 @@
 import { readFile, writeFile } from "fs/promises";
 import { join } from "path";
 import config from "./config";
-import type { ContextContents } from "./types";
+import type { Task, ContextContents } from "./types";
 
-export async function getContextFileContents(fileNames: string[]): Promise<ContextContents> {
+export async function getTaskContextContents(task: Task): Promise<ContextContents> {
+  const fileNames: string[] = task.context;
+
+  if(task.type = "update") {
+    fileNames.push(task.name);
+  }
+
+  return await readContextFiles(fileNames)
+}
+
+export async function readContextFiles(fileNames: string[]): Promise<ContextContents> {
   const contents: ContextContents = {};
   for (const file of fileNames) {
     const filePath = join(config.BASE_DIR, file);

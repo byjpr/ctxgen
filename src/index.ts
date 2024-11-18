@@ -1,6 +1,6 @@
 // index.ts
 import { AIClient } from "./ai";
-import { getContextFileContents, writeOutputFile } from "./fileUtils";
+import { getTaskContextContents, writeOutputFile } from "./fileUtils";
 import type { Task } from "./types";
 import { TaskQueue } from "./taskQueue";
 import { config } from "./config";
@@ -18,7 +18,7 @@ export async function processTasks(tasks: Task[]): Promise<void> {
 
   await taskQueue.run(async (task: Task) => {
     try {
-      const contextContent = await getContextFileContents(task.context);
+      const contextContent = await getTaskContextContents(task);
       const result = await aiClient.queryAI(task, contextContent);
       await writeOutputFile(task.name, result);
     } catch (error) {
