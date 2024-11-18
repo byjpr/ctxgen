@@ -5,7 +5,7 @@ export type Command = {
 
 export type Task = {
   context: string[];
-  type: "new" | "update";
+  type: "new" | "update" | "ack";
   name: string;
   commands: Array<Command[]>;
   before?: Function;

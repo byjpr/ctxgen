@@ -18,9 +18,13 @@ export async function processTasks(tasks: Task[]): Promise<void> {
 
   await taskQueue.run(async (task: Task) => {
     try {
-      const contextContent = await getTaskContextContents(task);
-      const result = await aiClient.queryAI(task, contextContent);
-      await writeOutputFile(task.name, result);
+      if(task.type == "ack") {
+        logger.info(`Acknowledged task: ${task.name}`);
+      } else {
+        const contextContent = await getTaskContextContents(task);
+        const result = await aiClient.queryAI(task, contextContent);
+        await writeOutputFile(task.name, result);
+      }
     } catch (error) {
       if (error instanceof FileNotFoundError) {
         logger.error(`File not found: ${error.message}`);
