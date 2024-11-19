@@ -1,6 +1,6 @@
 export type Command = {
   role: "system" | "user";
-  message: string;
+  content: string;
 };
 
 export type Task = {

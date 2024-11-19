@@ -13,8 +13,8 @@ const tasks: Task[] = [
     type: "new",
     context: ['about'],
     commands: [
-        { role: "system", message: await Bun.file("./system-prompts/app/prd.md").text() },
-        { role: "user", message: `Conduct your analysis and make sure you do not miss any feature or detail !
+        { role: "system", content: await Bun.file("./system-prompts/app/prd.md").text() },
+        { role: "user", content: `Conduct your analysis and make sure you do not miss any feature or detail !
 you are a genius` }
     ]
   }

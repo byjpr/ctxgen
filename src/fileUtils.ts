@@ -16,11 +16,11 @@ export async function getTaskContextContents(task: Task): Promise<ContextContent
 export async function readContextFiles(fileNames: string[]): Promise<ContextContents> {
   const contents: ContextContents = {};
   for (const file of fileNames) {
-    const filePath = join(config.BASE_DIR, file);
+    const filePath = join(config.BASE_DIR, `${file}.md`);
     try {
       contents[file] = await readFile(filePath, "utf8");
     } catch (error) {
-      throw new Error(`Required file ${file} does not exist.`);
+      throw new Error(`Required file ${file} does not exist at ${filePath}.`);
     }
   }
   return contents;
