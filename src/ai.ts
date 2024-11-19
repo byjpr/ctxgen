@@ -1,5 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
-import { config } from "./config";
+import config from "./config";
 import type { Task, ContextContents } from "./types";
 
 export class AIClient {
@@ -30,7 +30,7 @@ export class AIClient {
       model: config.ANTHROPIC_MODEL,
       system: system_command,
       messages: [...system_context, user_commands]
-    });§
+    });
 
     return response;
   }

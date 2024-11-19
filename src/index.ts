@@ -3,7 +3,7 @@ import { AIClient } from "./ai";
 import { getTaskContextContents, writeOutputFile } from "./fileUtils";
 import type { Task } from "./types";
 import { TaskQueue } from "./taskQueue";
-import { config } from "./config";
+import config from "./config";
 import logger from "./logger";
 import { FileNotFoundError, DependencyError, AIQueryError } from "./errors";
 
