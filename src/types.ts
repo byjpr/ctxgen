@@ -1,14 +1,14 @@
 export type Command = {
   role: "system" | "user";
-  message: string;
+  content: string;
 };
 
 export type Task = {
   context: string[];
-  type: "new" | "update";
+  type: "new" | "update" | "ack";
   name: string;
   commands: Array<Command[]>;
-  before: Function;
+  before?: Function;
 };
 
 export type ContextContents = Record<string, string>;

@@ -1,21 +1,26 @@
 // taskQueue.test.ts
 import { TaskQueue } from './taskQueue';
 import type { Task } from './types';
-import logger from './logger';
+import type { Logger } from './logger';
 
 import {describe, beforeEach, test, expect, jest, mock} from "bun:test";
 
-// Mock the logger
-mock('./logger', () => ({
-  info: jest.fn(),
-  error: jest.fn(),
-}));
+const delay = (time) => {
+  return new Promise(res => {
+    setTimeout(res,time)
+  })
+}
 
 describe('TaskQueue', () => {
   let taskQueue: TaskQueue;
+  let mockLogger: Logger;
 
   beforeEach(() => {
-    taskQueue = new TaskQueue();
+    mockLogger = {
+      info: jest.fn(),
+      error: jest.fn()
+    };
+    taskQueue = new TaskQueue(mockLogger);
     jest.clearAllMocks();
   });
 
@@ -59,6 +64,51 @@ describe('TaskQueue', () => {
     expect(processedTasks).toEqual(['task1', 'task2', 'task3']);
   });
 
+  test('run should handle task processing errors', async () => {
+    const task: Task = { name: 'errorTask', context: [], commands: [] };
+    taskQueue.addTask(task);
+
+    const processTask = jest.fn().mockRejectedValue(new Error('Task processing failed'));
+    await taskQueue.run(processTask);
+
+    expect(processTask).toHaveBeenCalledTimes(1);
+    expect(mockLogger.error).toHaveBeenCalledWith(expect.stringContaining('Error processing task errorTask'));
+    expect(taskQueue['completed'].size).toBe(0);
+  });
+
+  test('run should process tasks concurrently when possible', async () => {
+    const task1: Task = { name: 'task1', context: [], commands: [] };
+    const task2: Task = { name: 'task2', context: [], commands: [] };
+    const task3: Task = { name: 'task3', context: ['task1'], commands: [] };
+
+    taskQueue.addTask(task1);
+    taskQueue.addTask(task2);
+    taskQueue.addTask(task3);
+
+    const processTask = jest.fn().mockImplementation(async (task: Task) => {
+      await new Promise(resolve => setTimeout(resolve, 100));
+    });
+
+    const startTime = Date.now();
+    await taskQueue.run(processTask);
+    const endTime = Date.now();
+
+    expect(processTask).toHaveBeenCalledTimes(3);
+    // If tasks are processed concurrently, it should take less than 300ms
+    expect(endTime - startTime).toBeLessThan(250);
+  });
+
+  test('run should log task start and completion', async () => {
+    const task: Task = { name: 'loggedTask', context: [], commands: [] };
+    taskQueue.addTask(task);
+
+    const processTask = jest.fn().mockResolvedValue(undefined);
+    await taskQueue.run(processTask);
+
+    expect(mockLogger.info).toHaveBeenCalledWith('Starting task: loggedTask');
+    expect(mockLogger.info).toHaveBeenCalledWith('Completed task: loggedTask');
+  });
+
   test('run should remove completed tasks from the queue', async () => {
     const task: Task = { name: 'completedTask', context: [], commands: [] };
     taskQueue.addTask(task);
@@ -84,5 +134,61 @@ describe('TaskQueue', () => {
     await taskQueue.run(processTask);
 
     expect(processTask).not.toHaveBeenCalled();
+  });
+
+  test('run should handle task processing errors', async () => {
+    const task: Task = { name: 'errorTask', context: [], commands: [] };
+    taskQueue.addTask(task);
+
+    const processTask = jest.fn().mockRejectedValue(new Error('Task processing failed'));
+    await taskQueue.run(processTask);
+
+    expect(processTask).toHaveBeenCalledTimes(1);
+    expect(mockLogger.error).toHaveBeenCalledWith(expect.stringContaining('Error processing task errorTask'));
+    expect(taskQueue['completed'].size).toBe(0);
+  });
+
+  test('run should process tasks concurrently when possible 2', async () => {
+    const task1: Task = { name: 'task1', context: [], commands: [] };
+    const task2: Task = { name: 'task2', context: [], commands: [] };
+    const task3: Task = { name: 'task3', context: [], commands: [] };
+    const task4: Task = { name: 'task4', context: [], commands: [] };
+    const task5: Task = { name: 'task5', context: [], commands: [] };
+    const task6: Task = { name: 'task6', context: ['task1'], commands: [] };
+    const task7: Task = { name: 'task7', context: ['task6','task5'], commands: [] };
+
+    taskQueue.addTask(task1);
+    taskQueue.addTask(task2);
+    taskQueue.addTask(task3);
+    taskQueue.addTask(task4);
+    taskQueue.addTask(task5);
+    taskQueue.addTask(task6);
+    taskQueue.addTask(task7);
+
+    const processTask = jest.fn().mockImplementation(async (task: Task) => {
+      await new Promise(resolve => setTimeout(resolve, 500));
+    });
+
+    const startTime = Date.now();
+    await taskQueue.run(processTask);
+    const endTime = Date.now();
+
+    expect(mockLogger.info).toHaveBeenCalled();
+
+    expect(processTask).toHaveBeenCalledTimes(7);
+    // If tasks are processed concurrently, it should take less than 300ms
+    expect(endTime - startTime).not.toBeLessThan(250);
+  });
+
+  test('run should log task start and completion', async () => {
+    const task: Task = { name: 'loggedTask', context: [], commands: [] };
+    taskQueue.addTask(task);
+
+    const processTask = jest.fn().mockResolvedValue(undefined);
+    await taskQueue.run(processTask);
+
+    expect(mockLogger.info).toHaveBeenCalled();
+    expect(mockLogger.info).toHaveBeenCalledWith('Starting task: loggedTask');
+    expect(mockLogger.info).toHaveBeenCalledWith('Completed task: loggedTask');
   });
 });
