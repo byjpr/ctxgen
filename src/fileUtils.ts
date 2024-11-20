@@ -6,7 +6,7 @@ import type { Task, ContextContents } from "./types";
 export async function getTaskContextContents(task: Task): Promise<ContextContents> {
   const fileNames: string[] = task.context;
 
-  if(task.type = "update") {
+  if(task.type == "update") {
     fileNames.push(task.name);
   }
 
@@ -27,6 +27,6 @@ export async function readContextFiles(fileNames: string[]): Promise<ContextCont
 }
 
 export async function writeOutputFile(fileName: string, content: string): Promise<void> {
-  const outputPath = join(config.OUTPUT_DIR, fileName);
+  const outputPath = join(config.BASE_DIR, `${fileName}.md`);
   await writeFile(outputPath, content, "utf8");
 }
