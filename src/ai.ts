@@ -42,7 +42,7 @@ export class AIClient {
     const ai_object = {
       betas: ['prompt-caching-2024-07-31'],
       model: config.ANTHROPIC_MODEL,
-      max_tokens: 1024,
+      max_tokens: 8192,
       system: [...system_command, ...system_context],
       messages: [...user_commands]
     }
