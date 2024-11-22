@@ -49,4 +49,16 @@ export class TaskQueue {
       }
     }
   }
+
+  getDependencyTree(): Record<string, { dependencies: string[] }> {
+    const tree: Record<string, { dependencies: string[] }> = {};
+
+    for (const task of this.queue) {
+      tree[task.name] = {
+        dependencies: task.context
+      };
+    }
+
+    return tree;
+  }
 }
