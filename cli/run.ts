@@ -1,5 +1,5 @@
-import { processTasks } from "./src/index";
-import type { Task, Command } from "./src/types";
+import { processTasks } from "../src/index";
+import type { Task, Command } from "../src/types";
 
 const tasks: Task[] = [
   {
