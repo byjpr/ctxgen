@@ -1,330 +1,388 @@
 ```markdown
-# Features Requirements Document (FRD) for Totem E-commerce Platform
+# Features Requirements Document (FRD) for Totem: Extendable E-commerce Platform
 
 ## 1. Introduction
 
-Totem is a comprehensive e-commerce platform designed to empower Small and Medium-sized Businesses (SMBs) and startups to establish and grow their online presence. This FRD outlines the detailed features and requirements for the Totem platform's Minimum Viable Product (MVP).
+Totem is an innovative, user-friendly e-commerce platform designed to empower Small and Medium-sized Businesses (SMBs) and startups in establishing and growing their online presence. This document outlines the detailed feature requirements for the Minimum Viable Product (MVP) of Totem.
 
-## 2. Core Features
+## 2. Core E-commerce Functionality
 
-### 2.1 User Management
+### 2.1 Product Management
 
-#### 2.1.1 User Registration and Authentication
-- Feature: User account creation
+#### 2.1.1 Product Catalog
+- Feature: CRUD operations for products
   - Requirements:
-    - Allow users to register using email and password
-    - Implement email verification process
-    - Provide option for social media login (Google, Facebook)
-- Feature: User login
-  - Requirements:
-    - Secure login using email/password combination
-    - Implement password reset functionality
-    - Enable remember me option for convenience
-
-#### 2.1.2 User Roles and Permissions
-- Feature: Role-based access control
-  - Requirements:
-    - Define roles: Admin, Store Manager, Staff, Customer
-    - Implement granular permissions for each role
-    - Allow custom role creation and permission assignment
-
-#### 2.1.3 User Profile Management
-- Feature: Profile editing
-  - Requirements:
-    - Allow users to update personal information
-    - Enable password change functionality
-    - Provide option to link/unlink social media accounts
-
-### 2.2 Product Management
-
-#### 2.2.1 Product Catalog
-- Feature: Product creation and editing
-  - Requirements:
-    - Add new products with name, description, SKU, and price
+    - Add new products with details (name, description, SKU, price, images)
     - Edit existing product information
-    - Bulk edit functionality for multiple products
-- Feature: Product categorization
+    - Delete products or mark them as inactive
+    - View product details in a formatted layout
+- Feature: Product variants
   - Requirements:
-    - Create and manage product categories and subcategories
+    - Create multiple variants for a single product (e.g., size, color)
+    - Set unique prices and inventory levels for each variant
+    - Display variant options on product pages
+- Feature: Custom product attributes
+  - Requirements:
+    - Define custom fields for products (e.g., material, dimensions)
+    - Display custom attributes on product pages
+    - Use custom attributes in search and filtering
+- Feature: Product categorization and tagging
+  - Requirements:
+    - Create hierarchical category structure
     - Assign products to multiple categories
-    - Reorder categories and products within categories
-- Feature: Product image management
-  - Requirements:
-    - Upload multiple images per product
-    - Set primary product image
-    - Implement image cropping and resizing tools
-
-#### 2.2.2 Product Attributes and Variants
-- Feature: Custom attribute creation
-  - Requirements:
-    - Define custom attributes (e.g., size, color, material)
-    - Create attribute sets for different product types
-    - Assign attributes to products
-- Feature: Product variant management
-  - Requirements:
-    - Create product variants based on attributes
-    - Set unique SKUs and prices for variants
-    - Manage inventory at the variant level
-
-#### 2.2.3 Product Import/Export
+    - Add and manage tags for products
+    - Use categories and tags in navigation and filtering
 - Feature: Bulk product management
   - Requirements:
-    - Import products using CSV or XML files
-    - Export product data in multiple formats
-    - Provide templates for import files
+    - Import products via CSV or Excel file
+    - Export product data in standard formats
+    - Bulk edit product attributes (e.g., price, inventory)
 
-### 2.3 Inventory Management
+### 2.2 Inventory Management
 
-#### 2.3.1 Stock Tracking
-- Feature: Real-time inventory updates
+#### 2.2.1 Multi-warehouse Inventory
+- Feature: Real-time inventory tracking
   - Requirements:
-    - Automatically update stock levels on order placement/cancellation
-    - Display current stock levels in admin panel
-    - Set low stock thresholds and alerts
-- Feature: Multi-warehouse support
+    - Update inventory levels in real-time across all warehouses
+    - Display total inventory and per-warehouse inventory
+    - Automatic inventory adjustment upon order placement/fulfillment
+- Feature: Low stock alerts
   - Requirements:
-    - Add and manage multiple warehouse locations
-    - Assign inventory to specific warehouses
-    - Transfer inventory between warehouses
-
-#### 2.3.2 Inventory Adjustments
-- Feature: Manual inventory management
+    - Set low stock thresholds for products
+    - Send notifications when inventory reaches the threshold
+    - Display low stock status in admin dashboard
+- Feature: Inventory history
   - Requirements:
-    - Manually adjust stock levels with reason codes
-    - Record and track inventory movements
-    - Generate inventory adjustment reports
+    - Log all inventory changes with timestamps and reasons
+    - Provide an audit trail for inventory adjustments
+    - Generate inventory movement reports
 
-### 2.4 Order Management
+### 2.3 Order Management
 
-#### 2.4.1 Order Processing
-- Feature: Order creation and editing
+#### 2.3.1 Order Processing
+- Feature: Order creation and management
   - Requirements:
     - Create orders manually in admin panel
-    - Edit order details (add/remove products, update quantities)
-    - Apply discounts or promotional codes to orders
-- Feature: Order status management
-  - Requirements:
-    - Define and customize order statuses
-    - Automatically update order status based on actions
-    - Send notifications on order status changes
-
-#### 2.4.2 Order Fulfillment
-- Feature: Shipping integration
-  - Requirements:
-    - Generate packing slips and shipping labels
-    - Integrate with major shipping carriers (UPS, FedEx, etc.)
-    - Automatically mark orders as shipped and add tracking information
+    - View and edit order details (items, quantities, customer info)
+    - Process orders through various statuses (pending, processing, shipped, delivered)
 - Feature: Partial fulfillment
   - Requirements:
-    - Allow partial shipment of orders
-    - Track partially fulfilled orders separately
-    - Update customer on partial shipment status
-
-#### 2.4.3 Returns and Refunds
-- Feature: Return management
+    - Allow splitting orders into multiple shipments
+    - Update order status for partially fulfilled orders
+    - Generate separate invoices for each shipment
+- Feature: Order cancellation and refunds
   - Requirements:
-    - Process product returns and generate return labels
-    - Update inventory based on returned items
-    - Issue full or partial refunds
-- Feature: Return reason tracking
+    - Cancel orders or specific items within an order
+    - Process full or partial refunds
+    - Automatically update inventory for cancelled/refunded items
+- Feature: Shipping integration
   - Requirements:
-    - Collect and categorize reasons for returns
-    - Generate reports on return reasons and frequency
+    - Integration with major shipping carriers (UPS, FedEx, USPS)
+    - Real-time shipping rate calculation
+    - Generate and print shipping labels
+    - Provide tracking information to customers
 
-### 2.5 Customer Management
+### 2.4 Customer Management
 
-#### 2.5.1 Customer Profiles
-- Feature: Customer information management
+#### 2.4.1 Customer Accounts
+- Feature: Account creation and management
   - Requirements:
-    - Store and display customer details (name, contact info, addresses)
-    - View and manage customer order history
-    - Add notes to customer profiles for internal use
-
-#### 2.5.2 Customer Segmentation
-- Feature: Customer grouping
+    - Allow customers to create accounts with email or social login
+    - Provide account dashboard for order history, saved addresses, and preferences
+    - Enable password reset and account recovery options
+- Feature: Guest checkout
   - Requirements:
-    - Create customer segments based on attributes or behavior
-    - Assign customers to multiple segments
-    - Use segments for targeted marketing and promotions
-
-### 2.6 Search and Navigation
-
-#### 2.6.1 Product Search
-- Feature: Advanced search functionality
+    - Allow purchases without account creation
+    - Offer option to create account after checkout
+- Feature: Wishlists and saved carts
   - Requirements:
-    - Implement full-text search for products
-    - Provide filters for refining search results (price, category, attributes)
-    - Support for autocomplete and suggested searches
+    - Enable customers to save products to wishlists
+    - Allow customers to save and retrieve cart contents
+    - Provide option to share wishlists
 
-#### 2.6.2 Category Navigation
-- Feature: Category browsing
+### 2.5 Search and Navigation
+
+#### 2.5.1 Product Discovery
+- Feature: Advanced search
   - Requirements:
-    - Display products within their respective categories
-    - Implement breadcrumb navigation for easy browsing
-    - Allow sorting of products within categories (price, popularity, etc.)
+    - Implement full-text search across product names and descriptions
+    - Provide filtering options (price range, category, attributes)
+    - Support for faceted search
+- Feature: Autocomplete suggestions
+  - Requirements:
+    - Show product suggestions as user types in search box
+    - Display categories and popular searches in suggestions
+- Feature: Product sorting
+  - Requirements:
+    - Sort products by price (low to high, high to low)
+    - Sort by newest, bestselling, and customer rating
+    - Allow custom sorting options based on product attributes
 
-### 2.7 Checkout Process
+### 2.6 Shopping Cart and Checkout
 
-#### 2.7.1 Shopping Cart
+#### 2.6.1 Cart Functionality
+- Feature: Add to cart
+  - Requirements:
+    - Add products to cart from product pages and quick view modals
+    - Show confirmation message when item is added
+    - Update cart count in header
 - Feature: Cart management
   - Requirements:
-    - Add products to cart from product pages and quick view
-    - Update quantities and remove items from cart
-    - Display cart subtotal, taxes, and total
-- Feature: Cart persistence
-  - Requirements:
-    - Save cart contents for logged-in users
-    - Implement guest cart functionality with local storage
+    - View cart contents with product details and prices
+    - Update product quantities in cart
+    - Remove items from cart
+    - Calculate and display subtotal, taxes, and total
 
-#### 2.7.2 Checkout Flow
+#### 2.6.2 Checkout Process
 - Feature: Multi-step checkout
   - Requirements:
-    - Implement steps: Cart review, Shipping, Payment, Order confirmation
-    - Provide guest checkout option
-    - Allow registered users to use saved addresses and payment methods
-- Feature: Address validation
-  - Requirements:
-    - Integrate address validation service
-    - Suggest corrections for invalid addresses
-    - Allow manual override of suggested corrections
-
-#### 2.7.3 Payment Processing
+    - Implement steps: Cart review, Shipping, Payment, Confirmation
+    - Allow guest checkout and account creation
+    - Provide order summary throughout checkout process
 - Feature: Multiple payment options
   - Requirements:
-    - Integrate major payment gateways (Stripe, PayPal, etc.)
-    - Support credit card payments with PCI compliance
-    - Allow for custom payment methods (e.g., bank transfer, COD)
-
-### 2.8 Shipping and Delivery
-
-#### 2.8.1 Shipping Methods
-- Feature: Shipping option management
+    - Integrate with popular payment gateways (Stripe, PayPal)
+    - Support credit card payments
+    - Offer alternative payment methods (e.g., Apple Pay, Google Pay)
+- Feature: Tax calculation
   - Requirements:
-    - Configure multiple shipping options (standard, express, etc.)
-    - Set shipping rates based on weight, destination, or order value
-    - Implement free shipping thresholds
-
-#### 2.8.2 Delivery Estimation
-- Feature: Estimated delivery dates
+    - Calculate taxes based on shipping address and product type
+    - Support for multiple tax rates and regions
+- Feature: Shipping method selection
   - Requirements:
-    - Calculate and display estimated delivery dates on product and cart pages
-    - Use IP-based geolocation for initial delivery estimates
-    - Refine estimates based on user-provided location information
+    - Display available shipping methods with rates
+    - Allow selection of preferred shipping method
+    - Update order total based on selected shipping method
 
-### 2.9 Reporting and Analytics
+## 3. Extensibility and Integration
 
-#### 2.9.1 Sales Reports
-- Feature: Sales performance tracking
+### 3.1 Plugin Architecture
+
+#### 3.1.1 Plugin System
+- Feature: Modular plugin system
   - Requirements:
-    - Generate reports on sales, revenue, and profit
-    - Filter reports by date range, product, or customer segment
-    - Visualize sales data with charts and graphs
-
-#### 2.9.2 Inventory Reports
-- Feature: Stock level analysis
+    - Provide a framework for developing plugins
+    - Allow plugins to extend or modify core functionality
+    - Implement version control for plugins
+- Feature: Plugin marketplace
   - Requirements:
-    - Track stock levels and movement across warehouses
-    - Identify fast-moving and slow-moving products
-    - Generate low stock and out-of-stock reports
+    - Create a marketplace for third-party plugins
+    - Allow developers to submit plugins for review
+    - Provide rating and review system for plugins
 
-### 2.10 Platform Extensibility
+### 3.2 API and Webhooks
 
-#### 2.10.1 API Access
-- Feature: RESTful API
+#### 3.2.1 RESTful API
+- Feature: Comprehensive API
   - Requirements:
-    - Provide comprehensive API coverage for all platform functions
-    - Implement secure authentication for API access (OAuth 2.0)
-    - Offer detailed API documentation and examples
-
-#### 2.10.2 Webhooks
-- Feature: Event subscriptions
+    - Provide API endpoints for all core functionalities
+    - Implement authentication and authorization for API access
+    - Support CRUD operations via API
+- Feature: Webhook system
   - Requirements:
-    - Allow subscription to various platform events (order placed, product updated, etc.)
-    - Deliver real-time notifications for subscribed events
+    - Allow subscribers to register for specific events
+    - Send real-time notifications for subscribed events
     - Provide retry mechanism for failed webhook deliveries
 
-#### 2.10.3 Plugin Architecture
-- Feature: Third-party integrations
+#### 3.2.2 Developer Resources
+- Feature: API documentation
   - Requirements:
-    - Develop a modular plugin system for extending platform functionality
-    - Provide SDK and documentation for third-party developers
-    - Implement a marketplace for plugins and integrations
+    - Provide comprehensive, interactive API documentation
+    - Include code samples and SDKs for popular languages
+    - Offer a sandbox environment for testing
 
-## 3. User Interface Requirements
+### 3.3 Custom Hooks
 
-### 3.1 Admin Dashboard
-- Feature: Intuitive management interface
+#### 3.3.1 Extensibility Points
+- Feature: Pre-defined hooks
   - Requirements:
-    - Responsive design for desktop and mobile devices
-    - Customizable dashboard with key metrics and quick access to common tasks
-    - Advanced filtering and search capabilities for products, orders, and customers
-
-### 3.2 Storefront
-- Feature: Customizable store design
+    - Implement hooks for common customization points (e.g., pricing, inventory updates)
+    - Provide documentation for available hooks and their usage
+- Feature: Custom hook creation
   - Requirements:
-    - Responsive design that works across desktop, tablet, and mobile devices
-    - Customizable templates for easy store design and branding
-    - Fast-loading product pages with high-quality image galleries
+    - Allow developers to define and register custom hooks
+    - Provide mechanism to execute custom hooks at specific points in the application flow
 
-## 4. Performance and Technical Requirements
+## 4. Multi-warehouse and Shipping
 
-### 4.1 Performance
-- Feature: Fast and responsive platform
+### 4.1 Warehouse Management
+
+#### 4.1.1 Warehouse Operations
+- Feature: Warehouse CRUD
   - Requirements:
-    - Support a minimum of 1000 concurrent users
-    - Ensure page load times do not exceed 3 seconds
-    - Maintain API response times under 200ms for 95% of requests
-
-### 4.2 Scalability
-- Feature: Scalable architecture
+    - Add, edit, and remove warehouse locations
+    - Set warehouse details (address, contact information)
+    - Assign service regions to warehouses
+- Feature: Inventory allocation
   - Requirements:
-    - Implement horizontal scaling to handle increased load
-    - Optimize database design for large product catalogs (1M+ products)
-    - Use caching mechanisms (e.g., Redis) for frequently accessed data
+    - Assign and transfer inventory between warehouses
+    - Set warehouse priority for order fulfillment
+    - Generate reports on inventory levels per warehouse
 
-### 4.3 Security
-- Feature: Secure e-commerce platform
+### 4.2 Intelligent Shipping Estimates
+
+#### 4.2.1 Location-based Estimates
+- Feature: Geolocation for anonymous users
   - Requirements:
-    - Encrypt all sensitive data in transit and at rest
-    - Implement robust authentication and authorization mechanisms
-    - Conduct regular security audits and penetration testing
-
-## 5. Additional Features
-
-### 5.1 SEO Tools
-- Feature: Built-in SEO optimization
+    - Implement IP-based geolocation
+    - Determine closest warehouse based on geolocation
+    - Display estimated delivery time range
+- Feature: Precise estimates for logged-in users
   - Requirements:
-    - Automatically generate SEO-friendly URLs for products and categories
-    - Provide fields for meta titles, descriptions, and keywords
-    - Generate and manage XML sitemaps
+    - Use saved addresses for accurate shipping calculations
+    - Show exact delivery dates based on available shipping methods
+    - Update estimates in real-time as user changes shipping options
 
-### 5.2 Review and Rating System
-- Feature: Product reviews
+## 5. User Interface and Experience
+
+### 5.1 Storefront
+
+#### 5.1.1 Responsive Design
+- Feature: Mobile and desktop optimization
   - Requirements:
-    - Allow customers to leave product reviews and ratings
-    - Implement moderation tools for store owners to manage reviews
-    - Display average ratings and review counts on product pages
+    - Implement responsive design for all pages
+    - Optimize images and assets for fast loading on mobile
+    - Ensure touch-friendly interface elements for mobile users
 
-### 5.3 Wishlist Functionality
-- Feature: Customer wishlists
+#### 5.1.2 Customizable Themes
+- Feature: Theme customization
   - Requirements:
-    - Enable customers to create and manage wishlists
-    - Allow sharing of wishlists via email or social media
-    - Notify customers when wishlist items go on sale
+    - Provide a selection of pre-built themes
+    - Allow customization of colors, fonts, and layouts
+    - Support custom CSS for advanced customization
 
-### 5.4 Abandoned Cart Recovery
-- Feature: Cart abandonment tools
+#### 5.1.3 Product Listings
+- Feature: Product listing pages
   - Requirements:
-    - Automatically send email reminders for abandoned carts
-    - Customize timing and content of abandonment emails
-    - Provide discount codes in abandonment emails to encourage completion
+    - Display products in grid or list view
+    - Implement infinite scroll or pagination
+    - Provide sorting and filtering options
 
-### 5.5 Multi-Currency Support
-- Feature: Global currency options
+#### 5.1.4 Product Details
+- Feature: Product detail pages
   - Requirements:
-    - Support display and transactions in multiple currencies
-    - Automatically update exchange rates
-    - Allow customers to switch between currencies
+    - Display product images in a gallery with zoom functionality
+    - Show product description, specifications, and customer reviews
+    - Provide clear call-to-action for adding to cart
 
-This FRD outlines the core features and requirements for the Totem e-commerce platform MVP. It provides a comprehensive guide for development, ensuring that all essential functionalities are included to create a robust and user-friendly e-commerce solution for SMBs and startups.
+#### 5.1.5 Shopping Cart and Checkout
+- Feature: Cart and checkout pages
+  - Requirements:
+    - Design an intuitive, easy-to-use shopping cart
+    - Implement a streamlined, multi-step checkout process
+    - Provide clear error messages and validation feedback
+
+### 5.2 Admin Dashboard
+
+#### 5.2.1 Dashboard Overview
+- Feature: Key metrics display
+  - Requirements:
+    - Show real-time sales, orders, and revenue data
+    - Display inventory alerts and low stock notifications
+    - Provide quick access to recent orders and customer activity
+
+#### 5.2.2 Order Management Interface
+- Feature: Order processing tools
+  - Requirements:
+    - List all orders with filtering and sorting options
+    - Provide detailed view of individual orders
+    - Allow status updates and order editing
+
+#### 5.2.3 Product and Inventory Management
+- Feature: Product management tools
+  - Requirements:
+    - Provide interface for adding and editing products
+    - Display inventory levels across warehouses
+    - Allow bulk operations on products and inventory
+
+#### 5.2.4 Customer Management
+- Feature: Customer database
+  - Requirements:
+    - List all customers with search and filter capabilities
+    - Show detailed customer profiles with order history
+    - Provide tools for customer communication and support
+
+#### 5.2.5 Reports and Analytics
+- Feature: Business intelligence tools
+  - Requirements:
+    - Generate sales reports by product, category, and time period
+    - Provide inventory turnover and projection reports
+    - Offer customer segmentation and behavioral analytics
+
+## 6. Additional Features
+
+### 6.1 Content Management
+
+#### 6.1.1 Blog and Custom Pages
+- Feature: Blog functionality
+  - Requirements:
+    - Create and manage blog posts
+    - Categorize and tag blog content
+    - Allow comments on blog posts (with moderation)
+- Feature: Custom page creation
+  - Requirements:
+    - Create and edit custom pages (e.g., About Us, Terms of Service)
+    - Provide WYSIWYG editor for content creation
+    - Allow custom page templates
+
+### 6.2 SEO Tools
+
+#### 6.2.1 On-page SEO
+- Feature: SEO optimization
+  - Requirements:
+    - Editable meta titles and descriptions for all pages
+    - Automatic generation of sitemaps
+    - Customizable URL structures for products and categories
+
+### 6.3 Customer Communication
+
+#### 6.3.1 Automated Notifications
+- Feature: Email notifications
+  - Requirements:
+    - Send order confirmation, shipping, and delivery status emails
+    - Provide customizable email templates
+    - Allow customers to manage notification preferences
+
+#### 6.3.2 Customer Support
+- Feature: Support ticket system
+  - Requirements:
+    - Allow customers to create and track support tickets
+    - Provide an interface for staff to manage and respond to tickets
+    - Implement a knowledge base for common questions
+
+### 6.4 Mobile App for Store Management
+
+#### 6.4.1 Mobile Admin Features
+- Feature: Mobile admin application
+  - Requirements:
+    - View key store metrics and recent orders
+    - Process orders and update inventory on-the-go
+    - Receive push notifications for new orders and alerts
+
+### 6.5 Data Import/Export
+
+#### 6.5.1 Data Management Tools
+- Feature: Bulk data operations
+  - Requirements:
+    - Import products, customers, and orders from CSV or Excel files
+    - Export store data in various formats for backup and analysis
+    - Provide data mapping tools for imports from other platforms
+
+### 6.6 Returns and Refunds
+
+#### 6.6.1 Return Merchandise Authorization (RMA)
+- Feature: Returns management
+  - Requirements:
+    - Allow customers to initiate returns through their account
+    - Generate RMA numbers for tracking returns
+    - Process refunds or store credits for returned items
+- Feature: Refund processing
+  - Requirements:
+    - Support full and partial refunds
+    - Automatically update inventory for returned items
+    - Provide refund reports for accounting purposes
+
+## 7. Conclusion
+
+This Features Requirements Document outlines the comprehensive set of features and functionalities required for the Totem e-commerce platform MVP. By implementing these features, Totem will provide a robust, user-friendly, and extensible solution that meets the needs of SMBs and startups looking to establish and grow their online presence. The platform's focus on core e-commerce functionality, extensibility, and user experience will position it as a competitive option in the e-commerce platform market.
 ```

@@ -9,6 +9,7 @@
 [TableName]:
   - name: [columnName]
       type: [ js-parseable types like String, Number, Boolean ...]
+      postgresType: [ postgresql types like bigint, json, text, varchar ...]
       unique: [true || false]
       nullable: [true || false]
       default?: [...]

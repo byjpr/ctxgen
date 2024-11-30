@@ -4,9 +4,9 @@ Thank you for the kind words! I'm happy to help determine the backend specificat
 backend:
   requirements:
     restApi:
-      justifyYourAnswer: "A RESTful API is essential for the Totem e-commerce platform to support various features such as product management, order processing, inventory updates, and third-party integrations. The PRD and FRD explicitly mention the need for a comprehensive API for all platform functions, including secure authentication for API access. This API will enable external systems to interact with the platform, allow for custom integrations, and support the development of mobile apps or other client applications."
+      justifyYourAnswer: "A RESTful API is essential for the Totem e-commerce platform to support various core functionalities, third-party integrations, and the plugin system. It's explicitly mentioned in the PRD and FRD as a requirement for extensibility and integration. The API will enable operations on products, orders, customers, and other core entities, allowing for seamless integration with external systems and supporting the development of custom features by third-party developers."
       required: true
     realtimeWebsockets:
-      justifyYourAnswer: "While not explicitly mentioned in the provided documents, real-time WebSocket functionality would be beneficial for certain features of the Totem e-commerce platform. Real-time updates could enhance user experience for inventory tracking, order status updates, and live chat support. Additionally, the platform's extensibility requirements, including webhooks for real-time notifications of subscribed events, suggest that WebSocket technology could be valuable for delivering instant updates to both administrators and customers."
-      required: true
+      justifyYourAnswer: "While not explicitly mentioned in the provided documents, real-time websockets would be beneficial for certain features of the Totem platform. These could include live inventory updates, real-time order status changes, and instant notifications for new orders or customer support requests. Websockets would enhance the user experience for both store owners and customers by providing immediate updates without the need for constant polling."
+      required: false
 ```

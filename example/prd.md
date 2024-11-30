@@ -1,317 +1,262 @@
 ```markdown
-# Product Requirements Document (PRD) for Totem E-commerce Platform
+# Product Requirements Document (PRD) for Totem: Extendable E-commerce Platform
 
 ## 1. Introduction
 
 ### 1.1 Purpose
-Totem is a comprehensive e-commerce platform designed to empower Small and Medium-sized Businesses (SMBs) and startups to establish and grow their online presence. This PRD outlines the features, functionalities, and requirements for the Totem platform.
+Totem is a comprehensive, extendable e-commerce platform designed to empower Small and Medium-sized Businesses (SMBs) and startups to establish and grow their online presence. This document outlines the requirements for the Minimum Viable Product (MVP) of Totem.
 
-### 1.2 Scope
-The scope of this document covers the Minimum Viable Product (MVP) features of the Totem e-commerce platform, focusing on core functionalities essential for online retail operations.
+### 1.2 Product Overview
+Totem provides a robust, scalable, and customizable e-commerce solution that allows businesses to easily set up their online stores, manage inventory across multiple warehouses, process orders, and integrate with third-party services. The platform is built with extensibility in mind, featuring hooks for custom logic and webhooks for event subscriptions.
 
-### 1.3 Definitions and Acronyms
-- SMB: Small and Medium-sized Business
-- MVP: Minimum Viable Product
-- SKU: Stock Keeping Unit
-- API: Application Programming Interface
-
-## 2. Product Overview
-
-### 2.1 Product Description
-Totem is a versatile e-commerce platform that provides SMBs and startups with the tools and infrastructure needed to create, manage, and scale their online stores. The platform offers a range of features including product management, inventory control, order processing, customer management, and extensibility options for third-party integrations.
-
-### 2.2 Target Audience
+### 1.3 Target Audience
 - Small and Medium-sized Businesses (SMBs)
 - Startup companies
-- Online retailers
-- Entrepreneurs looking to establish an online presence
+- Third-party developers and integrators
 
-### 2.3 Key Features
-1. Product Management
-2. Inventory Management
-3. Order Processing
-4. Customer Management
-5. Multi-warehouse Support
-6. Extensibility and Integration Capabilities
-7. Region-based Delivery Estimation
+## 2. Features and Requirements
 
-## 3. User Personas
+### 2.1 Core E-commerce Functionality
+
+#### 2.1.1 Product Management
+- Create, read, update, and delete (CRUD) operations for products
+- Support for product variants (e.g., size, color)
+- Custom product attributes
+- Product categorization and tagging
+- Bulk import/export of product data
+
+#### 2.1.2 Inventory Management
+- Real-time inventory tracking across multiple warehouses
+- Low stock alerts and notifications
+- Automatic inventory updates upon order placement/fulfillment
+- Inventory history and audit trails
+
+#### 2.1.3 Order Management
+- Order creation and processing
+- Order status tracking (e.g., pending, processing, shipped, delivered)
+- Support for partial fulfillment and split shipments
+- Order cancellation and refund processing
+- Integration with shipping carriers for real-time shipping rates and tracking
+
+#### 2.1.4 Customer Management
+- Customer account creation and management
+- Guest checkout option
+- Customer order history
+- Wishlists and saved carts
+
+#### 2.1.5 Search and Navigation
+- Advanced product search with filters (e.g., price, category, attributes)
+- Autocomplete suggestions
+- Product sorting options (e.g., price, popularity, newest)
+
+#### 2.1.6 Shopping Cart and Checkout
+- Add to cart functionality
+- Cart management (update quantities, remove items)
+- Multi-step checkout process
+- Support for multiple payment gateways
+- Tax calculation based on shipping address
+- Shipping method selection
+
+### 2.2 Extensibility and Integration
+
+#### 2.2.1 Plugin Architecture
+- Modular plugin system for extending platform functionality
+- Plugin marketplace for third-party developers
+
+#### 2.2.2 API and Webhooks
+- RESTful API for all core functionalities
+- Webhook system for event-driven integrations
+- API documentation and developer resources
+
+#### 2.2.3 Custom Hooks
+- Pre-defined hooks for common customization points (e.g., pricing logic, inventory updates)
+- ability to add custom hooks for specific business needs
+
+### 2.3 Multi-warehouse and Shipping
+
+#### 2.3.1 Warehouse Management
+- CRUD operations for warehouses
+- Assign inventory to specific warehouses
+- Set warehouse service regions
+
+#### 2.3.2 Intelligent Shipping Estimates
+- IP-based geolocation for anonymous users
+- Display fastest delivery time based on warehouse locations and service regions
+- Accurate shipping estimates for logged-in users with known addresses
+
+### 2.4 User Interface and Experience
+
+#### 2.4.1 Storefront
+- Responsive design for mobile and desktop
+- Customizable themes and layouts
+- Product listing pages with filtering and sorting options
+- Product detail pages with image gallery, description, and add to cart functionality
+- Shopping cart and checkout pages
+
+#### 2.4.2 Admin Dashboard
+- Overview of key metrics (e.g., sales, orders, inventory levels)
+- Order management interface
+- Product and inventory management tools
+- Customer management
+- Reports and analytics
+
+## 3. User Personas and Stories
 
 ### 3.1 Store Owner (Sarah)
-- Age: 35
-- Role: Founder of a small clothing brand
-- Goals: Expand online presence, manage inventory efficiently, process orders quickly
+Sarah is the owner of a small boutique clothing store looking to expand her business online.
 
-### 3.2 Store Manager (Michael)
-- Age: 28
-- Role: E-commerce manager for a growing home decor startup
-- Goals: Monitor sales, manage product listings, handle customer inquiries
+**User Stories:**
+1. As a store owner, I want to easily add and manage my product catalog so that I can keep my online store up-to-date.
+2. As a store owner, I want to track my inventory across my physical store and warehouse so that I can avoid overselling.
+3. As a store owner, I want to customize the look and feel of my online store so that it matches my brand identity.
+4. As a store owner, I want to view sales reports and analytics so that I can make informed business decisions.
 
-### 3.3 Developer (Alex)
-- Age: 30
-- Role: Third-party developer creating custom integrations
-- Goals: Extend platform functionality, integrate with external services
+### 3.2 Customer (Mike)
+Mike is a 30-year-old professional who frequently shops online for convenience.
 
-### 3.4 Customer (Emma)
-- Age: 25
-- Role: Online shopper
-- Goals: Browse products, make purchases, track orders
+**User Stories:**
+1. As a customer, I want to easily search and filter products so that I can find what I'm looking for quickly.
+2. As a customer, I want to see accurate shipping estimates so that I know when to expect my order.
+3. As a customer, I want to be able to track my order status so that I can stay informed about its progress.
+4. As a customer, I want to be able to save items to my wishlist so that I can purchase them later.
 
-## 4. User Stories
+### 3.3 Third-party Developer (Alex)
+Alex is a developer working on integrating a custom CRM system with the e-commerce platform.
 
-### 4.1 Store Owner (Sarah)
-1. As a store owner, I want to easily add and manage products so that I can keep my inventory up-to-date.
-2. As a store owner, I want to view sales reports so that I can make informed business decisions.
-3. As a store owner, I want to manage multiple warehouses so that I can optimize my inventory across locations.
+**User Stories:**
+1. As a developer, I want access to comprehensive API documentation so that I can understand how to integrate with the platform.
+2. As a developer, I want to be able to subscribe to specific events via webhooks so that I can sync data in real-time.
+3. As a developer, I want to be able to extend the platform's functionality through plugins so that I can add custom features for my clients.
 
-### 4.2 Store Manager (Michael)
-1. As a store manager, I want to process and fulfill orders efficiently so that customers receive their products on time.
-2. As a store manager, I want to manage customer information and purchase history so that I can provide personalized service.
-3. As a store manager, I want to update product attributes and pricing so that I can run promotions and sales events.
+## 4. User Journeys
 
-### 4.3 Developer (Alex)
-1. As a developer, I want to access robust APIs and hooks so that I can create custom integrations and extend platform functionality.
-2. As a developer, I want to subscribe to webhook events so that I can build real-time integrations with external systems.
+### 4.1 Store Setup Journey
+1. Store owner signs up for Totem
+2. Completes initial store setup (name, logo, basic settings)
+3. Adds products to the catalog
+4. Sets up inventory across warehouses
+5. Configures shipping and tax settings
+6. Customizes store theme
+7. Launches store
 
-### 4.4 Customer (Emma)
-1. As a customer, I want to browse products and view detailed information so that I can make informed purchase decisions.
-2. As a customer, I want to see accurate delivery time estimates so that I know when to expect my order.
-3. As a customer, I want to create an account and manage my profile so that I can track my orders and save my preferences.
+### 4.2 Customer Purchase Journey
+1. Customer visits the online store
+2. Searches for a product using filters
+3. Views product details
+4. Adds item to cart
+5. Proceeds to checkout
+6. Enters shipping information
+7. Selects shipping method
+8. Completes payment
+9. Receives order confirmation
 
-## 5. Functional Requirements
+### 4.3 Order Fulfillment Journey
+1. Store owner receives new order notification
+2. Reviews order details
+3. Processes payment (if not automatic)
+4. Allocates inventory from appropriate warehouse
+5. Generates shipping label
+6. Marks order as shipped
+7. Customer receives shipping confirmation with tracking information
 
-### 5.1 Product Management
-1. Product Catalog
-   - Add, edit, and delete products
-   - Set product names, descriptions, and SKUs
-   - Upload and manage product images
-   - Assign products to categories
-   - Set product visibility (active/inactive)
+### 4.4 Third-party Integration Journey
+1. Developer signs up for API access
+2. Reviews API documentation
+3. Implements API calls in their application
+4. Sets up webhook subscriptions for relevant events
+5. Tests integration in sandbox environment
+6. Deploys integration to production
 
-2. Product Attributes
-   - Define custom attributes (e.g., size, color, material)
-   - Assign attributes to products
-   - Create attribute sets for different product types
+## 5. Technical Requirements
 
-3. Pricing
-   - Set base prices for products
-   - Configure discounts and promotional pricing
-   - Support for bulk price updates
+### 5.1 Platform Architecture
+- Scalable cloud-based infrastructure
+- Microservices architecture for modularity and scalability
+- Containerization for easy deployment and scaling
 
-4. Product Variants
-   - Create and manage product variants (e.g., different sizes or colors)
-   - Set unique SKUs and prices for variants
+### 5.2 Database Design
+- Relational database for transactional data (orders, customers)
+- NoSQL database for product catalog and inventory for flexibility and performance
 
-### 5.2 Inventory Management
-1. Stock Tracking
-   - Real-time inventory updates
-   - Low stock alerts and notifications
-   - Support for backorders and pre-orders
-
-2. Multi-warehouse Support
-   - Add and manage multiple warehouse locations
-   - Assign inventory to specific warehouses
-   - Transfer inventory between warehouses
-
-3. Inventory Adjustments
-   - Manual inventory adjustments with reason codes
-   - Bulk import/export of inventory data
-
-### 5.3 Order Processing
-1. Order Creation and Management
-   - Create orders manually or automatically from customer purchases
-   - View and edit order details
-   - Apply discounts or promotional codes to orders
-
-2. Order Fulfillment
-   - Process orders for shipment
-   - Generate packing slips and shipping labels
-   - Mark orders as shipped and provide tracking information
-
-3. Order Status and Notifications
-   - Update order status (e.g., pending, processing, shipped, delivered)
-   - Send automated order status updates to customers
-
-4. Returns and Refunds
-   - Process product returns and refunds
-   - Update inventory based on returned items
-
-### 5.4 Customer Management
-1. Customer Profiles
-   - Create and manage customer accounts
-   - Store customer information (name, contact details, addresses)
-   - View customer order history and preferences
-
-2. Customer Segmentation
-   - Group customers based on attributes or purchase behavior
-   - Create targeted marketing campaigns for customer segments
-
-3. Customer Support
-   - Log and track customer inquiries and support tickets
-   - Maintain communication history with customers
-
-### 5.5 Search and Navigation
-1. Product Search
-   - Implement powerful search functionality with filters and sorting options
-   - Support for autocomplete and suggested searches
-
-2. Category Navigation
-   - Create and manage product categories and subcategories
-   - Display products within their respective categories
-
-### 5.6 Checkout Process
-1. Shopping Cart
-   - Add products to cart
-   - Update quantities and remove items from cart
-   - Save cart for later or abandon cart recovery
-
-2. Checkout Flow
-   - Multi-step checkout process (shipping, billing, payment)
-   - Guest checkout option
-   - Address validation and suggestion
-
-3. Payment Processing
-   - Integration with multiple payment gateways
-   - Support for various payment methods (credit cards, PayPal, etc.)
-   - Secure payment processing and PCI compliance
-
-### 5.7 Shipping and Delivery
-1. Shipping Methods
-   - Configure multiple shipping options (standard, express, etc.)
-   - Set shipping rates based on weight, destination, or order value
-
-2. Delivery Estimation
-   - Calculate and display estimated delivery dates
-   - Use IP-based geolocation for initial delivery estimates
-   - Refine estimates based on user-provided location information
-
-### 5.8 Reporting and Analytics
-1. Sales Reports
-   - Generate reports on sales, revenue, and profit
-   - Filter reports by date range, product, or customer segment
-
-2. Inventory Reports
-   - Track stock levels and movement across warehouses
-   - Identify fast-moving and slow-moving products
-
-3. Customer Insights
-   - Analyze customer behavior and purchase patterns
-   - Track customer acquisition and retention metrics
-
-### 5.9 Platform Extensibility
-1. API Access
-   - Provide comprehensive RESTful API for all platform functions
-   - Implement secure authentication for API access
-
-2. Webhooks
-   - Allow businesses to subscribe to various platform events
-   - Deliver real-time notifications for subscribed events
-
-3. Plugin Architecture
-   - Develop a modular plugin system for extending platform functionality
-   - Provide documentation and SDKs for third-party developers
-
-4. Customization Hooks
-   - Implement hooks for customizing core platform behavior
-   - Allow for custom pricing logic, data validation, and workflow modifications
-
-## 6. Non-Functional Requirements
-
-### 6.1 Performance
-- The platform should support a minimum of 1000 concurrent users
-- Page load times should not exceed 3 seconds
-- API response times should be under 200ms for 95% of requests
-
-### 6.2 Scalability
-- The architecture should allow for horizontal scaling to handle increased load
-- Database design should optimize for large product catalogs (1M+ products)
-
-### 6.3 Reliability
-- The platform should have 99.9% uptime
-- Implement fault tolerance and disaster recovery mechanisms
-
-### 6.4 Security
-- Encrypt all sensitive data in transit and at rest
-- Implement robust authentication and authorization mechanisms
+### 5.3 Security
+- SSL/TLS encryption for all data transmissions
+- PCI DSS compliance for payment processing
 - Regular security audits and penetration testing
 
-### 6.5 Compliance
-- Ensure GDPR compliance for handling customer data
-- Implement necessary measures for PCI DSS compliance
+### 5.4 Performance
+- Content Delivery Network (CDN) for static assets
+- Caching mechanisms for frequently accessed data
+- Database query optimization and indexing
 
-### 6.6 Localization
-- Support for multiple languages and currencies
-- Ability to configure tax rates based on regions
+### 5.5 Integrations
+- Payment gateway integrations (e.g., Stripe, PayPal)
+- Shipping carrier integrations (e.g., UPS, FedEx, USPS)
+- Email service provider integration for transactional emails
 
-## 7. User Interface Requirements
+## 6. Future Considerations (Post-MVP)
 
-### 7.1 Admin Dashboard
-- Intuitive and responsive design for easy management on desktop and mobile devices
-- Customizable dashboard with key metrics and quick access to common tasks
-- Advanced filtering and search capabilities for products, orders, and customers
-
-### 7.2 Storefront
-- Responsive design that works across desktop, tablet, and mobile devices
-- Customizable templates for easy store design and branding
-- Fast-loading product pages with high-quality image galleries
-
-## 8. Technical Requirements
-
-### 8.1 Architecture
-- Microservices-based architecture for scalability and maintainability
-- Use of containerization (e.g., Docker) for consistent deployments
-
-### 8.2 Database
-- Utilize a combination of relational (e.g., PostgreSQL) and NoSQL (e.g., MongoDB) databases for different data types
-- Implement database sharding for improved performance with large datasets
-
-### 8.3 Caching
-- Implement robust caching mechanisms (e.g., Redis) for frequently accessed data
-- Use CDN for static asset delivery
-
-### 8.4 Search
-- Integrate a powerful search engine (e.g., Elasticsearch) for fast and relevant product searches
-
-### 8.5 Integration Capabilities
-- Provide SDKs and documentation for common programming languages
-- Implement OAuth 2.0 for secure API authentication
-
-## 9. Future Considerations (Post-MVP)
-
+- Multi-language and multi-currency support
+- Advanced analytics and reporting
+- A/B testing capabilities
+- Abandoned cart recovery
+- Loyalty program and reward points system
+- Social media integrations
 - Mobile app for store management
-- Advanced analytics and business intelligence tools
-- AI-powered product recommendations
-- Social media integration for marketing and sales
-- Marketplace functionality for multi-vendor support
 
-## 10. Additional Analysis
+## 7. Success Metrics
 
-Upon critical review of the PRD, the following potential omissions or areas for improvement have been identified:
+- Number of active stores
+- Total Gross Merchandise Value (GMV) processed
+- Average order value
+- Customer retention rate
+- Platform uptime and performance metrics
+- Number of third-party integrations and plugins
 
-1. User Roles and Permissions: The PRD should include a more detailed breakdown of user roles within the platform (e.g., admin, manager, staff) and their associated permissions.
+## 8. Additional Analysis
 
-2. Product Import/Export: A feature for bulk import and export of product data, including CSV or XML file support, should be explicitly mentioned in the Product Management section.
+Upon critical review of the PRD, there are a few areas that could be expanded or clarified to ensure a comprehensive MVP:
 
-3. Order Management Workflows: More detailed descriptions of order management workflows, including order editing, splitting, and merging capabilities, should be included.
+### 8.1 Product Pricing and Discounts
+The initial PRD didn't explicitly cover pricing strategies and discount capabilities. These are crucial for e-commerce operations:
 
-4. Tax Calculation: While mentioned briefly in the Localization section, a more comprehensive tax calculation and management system should be detailed, including support for various tax rules and integrations with tax calculation services.
+- Support for different pricing models (e.g., fixed price, tiered pricing, bulk discounts)
+- Ability to set sale prices with start and end dates
+- Coupon and promotional code functionality
+- Support for bundled products and kit pricing
 
-5. Abandoned Cart Recovery: Although mentioned in the Shopping Cart section, a more detailed description of abandoned cart recovery features and automated email notifications should be provided.
+### 8.2 Content Management
+While product management was covered, a more robust content management system would benefit store owners:
 
-6. SEO Tools: The PRD should include built-in SEO tools for optimizing product pages, meta tags, and generating sitemaps.
+- Blog or news section for content marketing
+- Custom pages for terms of service, about us, etc.
+- SEO optimization tools for product pages and content
 
-7. Review and Rating System: A feature for customers to leave product reviews and ratings, along with moderation capabilities for store owners, should be included.
+### 8.3 Customer Communication
+The PRD should include more detailed requirements for customer communication:
 
-8. Wishlist Functionality: The ability for customers to create and manage wishlists should be added to the customer-facing features.
+- Automated email notifications for order status changes, shipping updates, etc.
+- Customer support ticket system
+- Live chat integration capabilities
 
-9. Gift Cards and Store Credit: Support for selling and redeeming gift cards, as well as managing store credit, should be detailed in the payment processing section.
+### 8.4 Mobile Responsiveness
+While mentioned briefly, mobile responsiveness deserves more attention:
 
-10. Inventory Forecasting: While inventory management is covered, the PRD should include more advanced inventory forecasting tools to help businesses predict future stock needs.
+- Mobile-first design approach
+- Touch-friendly interface elements
+- Optimized checkout process for mobile devices
 
-11. Multi-Currency Support: More detailed requirements for handling multiple currencies, including exchange rate management and display options, should be provided.
+### 8.5 Data Import/Export
+For businesses transitioning from other platforms:
 
-12. Performance Monitoring: Include requirements for built-in performance monitoring tools to help store owners track and optimize their store's performance.
+- Bulk data import tools for products, customers, and orders
+- Data export functionality for backup and analysis purposes
 
-These additions would further enhance the comprehensiveness of the PRD and ensure that all core MVP features are adequately covered.
+### 8.6 Return and Refund Management
+An often-overlooked but crucial part of e-commerce operations:
 
+- Return merchandise authorization (RMA) process
+- Refund and store credit issuance
+- Integration with inventory management for returned items
+
+These additions would make the MVP more robust and ready to handle a wider range of e-commerce scenarios from the outset.
 ```

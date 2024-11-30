@@ -51,50 +51,46 @@ you're a genius` }
 you're a genius` }
     ]
   },
-//   {
-//     name: 'postgres',
-//     type: "new",
-//     context: ['about', 'drd', 'schema'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/db/postgres.js
-//     commands: [
-//         { role: "system", content: await Bun.file("./system-prompts/app/postgres.md").text() },
-//         { role: "user", content: `Generate the POSTGRES command in one single comprehensive answer
-// it is expected to be very comprehensive and detailed and cover all the provided details
+  {
+    name: 'postgres',
+    type: "new",
+    context: ['about', 'drd', 'schema'], // https://github.com/raidendotai/cofounder/blob/main/cofounder/api/system/functions/db/postgres.js
+    commands: [
+        { role: "system", content: await Bun.file("./system-prompts/app/postgres.md").text() },
+        { role: "user", content: `Generate the POSTGRES command in one single comprehensive answer
+it is expected to be very comprehensive and detailed and cover all the provided details
 
-// ---
+---
 
-// very important :
-//  > avoid any postgres-hardcoded methods ie. for generating UIDs etc... or similar ; logic for that stuff will come from nodejs functions !
-//  > do not generate UUIDs or similar inside postgres ! that stuff will come from nodejs functions !
-//  > in case of UUIDs, make them normal strings and not generated inside postgres by postgres methods !
+very important :
+ > avoid any postgres-hardcoded methods ie. for generating UIDs etc... or similar ; logic for that stuff will come from nodejs functions !
+ > do not generate UUIDs or similar inside postgres ! that stuff will come from nodejs functions !
+ > in case of UUIDs, make them normal strings and not generated inside postgres by postgres methods !
 
 
-// > aim for it to work on any default light postgres without any extra configs or plugins !
-// > only use basic primitives like numbers, strings, json, etc ... no uuid types or special types etc
-// > very important : only use basic primitives like numbers, strings, json, etc ... no uuid types or any special types etc ! very basic primitives only !
+> aim for it to work on any default light postgres without any extra configs or plugins !
 
-// reply in \`\`\`postgresql\`\`\`
+reply in \`\`\`postgresql\`\`\`
 
-// you're a genius` }
-//     ]
-//   },
-//   {
-//     name: 'schema',
-//     type: "new",
-//     context: ['about', 'drd', 'prd'],
-//     commands: [
-//         { role: "system", content: await Bun.file("./system-prompts/app/schema.md").text() },
-//         { role: "user", content: `Design the DB schemas in a comprehensive answer
-// it is expected to be very comprehensive and detailed ; in a VALID PARSEABLE YAML format
+you're a genius` }
+    ]
+  },
+  {
+    name: 'schema',
+    type: "new",
+    context: ['about', 'drd', 'prd'],
+    commands: [
+        { role: "system", content: await Bun.file("./system-prompts/app/schema.md").text() },
+        { role: "user", content: `Design the DB schemas in a comprehensive answer
+it is expected to be very comprehensive and detailed ; in a VALID PARSEABLE YAML format
 
-// very important :
-// - avoid any postgres-hardcoded methods ie. for generating UIDs etc... make them normal strings
-// - logic for that stuff will come from nodejs functions !
-// - only use basic primitives like numbers, strings, json, etc ... no uuid types or special types etc
-// - very important : only use basic primitives like numbers, strings, json, etc ... no uuid types or any special types etc ! very basic primitives only !
+very important :
+- avoid any postgres-hardcoded methods ie. for generating UIDs etc... make them normal strings
+- logic for that stuff will come from nodejs functions !
 
-// you're a genius` }
-//     ]
-//   }
+you're a genius` }
+    ]
+  }
 ];
 
 async function loadTasks(): Promise<Task[]> {
