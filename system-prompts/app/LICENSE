@@ -21,7 +21,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 This file applies to the following files only:
-- dbrd.md
+- brd.md
 - drd.md
 - frd.md
+- postgres.md
 - prd.md
+- schema.md
