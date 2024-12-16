@@ -1,4 +1,3 @@
-```markdown
 # Database Requirements Document (DRD) for Totem E-commerce Platform
 
 ## 1. Introduction
@@ -413,5 +412,3 @@ Justification: These considerations ensure that the database can scale to handle
 ## 8. Conclusion
 
 This database design provides a robust and flexible foundation for the Totem e-commerce platform. By utilizing a hybrid approach with both relational and NoSQL databases, we can efficiently handle structured transactional data while providing the flexibility needed for diverse product catalogs and custom attributes. The design supports all key features outlined in the PRD and FRD, including multi-warehouse inventory management, order processing, user management, and extensibility through plugins and webhooks.
-
-```

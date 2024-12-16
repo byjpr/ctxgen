@@ -1,5 +1,3 @@
-Here's the comprehensive PostgreSQL command to create the tables and seed the database based on the provided schema:
-
 ```postgresql
 -- Create tables
 CREATE TABLE users (

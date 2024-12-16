@@ -26,7 +26,7 @@ Totem is an innovative, user-friendly e-commerce platform designed to empower Sm
     - Define custom fields for products (e.g., material, dimensions)
     - Display custom attributes on product pages
     - Use custom attributes in search and filtering
-- Feature: Product categorization and tagging
+- Feature: Product categorization
   - Requirements:
     - Create hierarchical category structure
     - Assign products to multiple categories
