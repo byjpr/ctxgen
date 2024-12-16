@@ -1,0 +1,328 @@
+{
+  "apis": [
+    {
+      "name": "Users",
+      "basePath": "/api/users",
+      "resources": [
+        {
+          "path": "/",
+          "methods": ["GET", "POST"],
+          "description": "List all users or create a new user",
+          "impactedTables": ["users"]
+        },
+        {
+          "path": "/{uid}",
+          "methods": ["GET", "PUT", "DELETE"],
+          "description": "Get, update, or delete a specific user",
+          "impactedTables": ["users"]
+        },
+        {
+          "path": "/{uid}/addresses",
+          "methods": ["GET", "POST"],
+          "description": "Manage addresses for a specific user",
+          "impactedTables": ["addresses"],
+          "acidTransaction": true
+        }
+      ]
+    },
+    {
+      "name": "Products",
+      "basePath": "/api/products",
+      "resources": [
+        {
+          "path": "/",
+          "methods": ["GET", "POST"],
+          "description": "List all products or create a new product",
+          "impactedTables": ["products", "categories", "tags"]
+        },
+        {
+          "path": "/{uid}",
+          "methods": ["GET", "PUT", "DELETE"],
+          "description": "Get, update, or delete a specific product",
+          "impactedTables": ["products", "inventory"]
+        },
+        {
+          "path": "/bundles",
+          "methods": [
+            "GET",
+            "POST"
+          ],
+          "description": "List all bundles or create a new product bundles",
+          "impactedTables": [
+            "product_bundles",
+            "product_bundle_items"
+          ]
+        },
+        {
+          "path": "/bundles/{uid}",
+          "methods": [
+            "GET",
+            "PUT",
+            "DELETE"
+          ],
+          "description": "Get, update, or delete a specific product bundles",
+          "impactedTables": [
+            "product_bundles",
+            "product_bundle_items"
+          ]
+        },
+        {
+          "path": "/{uid}/inventory",
+          "methods": ["GET", "PUT"],
+          "description": "Manage inventory for a specific product",
+          "impactedTables": ["inventory"],
+          "acidTransaction": true
+        },
+        {
+          "path": "/{uid}/questions",
+          "methods": [
+            "GET",
+            "POST"
+          ],
+          "description": "Retrieve or create questions for a product",
+          "impactedTables": [
+            "product_questions"
+          ]
+        },
+        {
+          "path": "/{uid}/reviews",
+          "methods": [
+            "GET",
+            "POST"
+          ],
+          "description": "Retrieve or create reviews for a product",
+          "impactedTables": [
+            "reviews"
+          ]
+        },
+        {
+          "path": "/{uid}/related",
+          "methods": [
+            "GET",
+            "POST",
+            "DELETE"
+          ],
+          "description": "Manage related products for cross-sell and upsell",
+          "impactedTables": [
+            "product_related"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "basePath": "/api/orders",
+      "resources": [
+        {
+          "path": "/",
+          "methods": ["GET", "POST"],
+          "description": "List all orders or create a new order",
+          "impactedTables": ["orders", "order_items", "inventory", "payments"],
+          "acidTransaction": true,
+          "additionalLogic": [
+            "Decrease inventory for products in order_items",
+            "Process initial payment if payment_method is provided"
+          ]
+        },
+        {
+          "path": "/{uid}",
+          "methods": ["GET", "PUT"],
+          "description": "Get or update a specific order",
+          "impactedTables": ["orders", "order_items", "payments"]
+        },
+        {
+          "path": "/{uid}/status",
+          "methods": ["PUT"],
+          "description": "Update the status of an order",
+          "impactedTables": ["orders"]
+        }
+      ]
+    },
+    {
+      "name": "Cart",
+      "basePath": "/api/cart",
+      "resources": [
+        {
+          "path": "/{user_uid}",
+          "methods": ["GET"],
+          "description": "Retrieve the cart for a user",
+          "impactedTables": ["cart", "cart_items"]
+        },
+        {
+          "path": "/{user_uid}/items",
+          "methods": ["POST", "PUT", "DELETE"],
+          "description": "Manage items in the user's cart",
+          "impactedTables": ["cart_items"]
+        },
+        {
+          "path": "/{user_uid}/checkout",
+          "methods": ["POST"],
+          "description": "Convert cart to an order",
+          "impactedTables": ["orders", "order_items", "inventory"],
+          "acidTransaction": true,
+          "additionalLogic": [
+            "Decrease inventory for cart items",
+            "Create order and order_items"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wishlists",
+      "basePath": "/api/wishlists",
+      "resources": [
+        {
+          "path": "/{user_uid}",
+          "methods": ["GET", "POST"],
+          "description": "Retrieve or create wishlists for a user",
+          "impactedTables": ["wishlists"]
+        },
+        {
+          "path": "/{wishlist_uid}/items",
+          "methods": ["GET", "POST", "DELETE"],
+          "description": "Manage items in a wishlist",
+          "impactedTables": ["wishlist_items"]
+        }
+      ]
+    },
+    {
+      "name": "Shipping",
+      "basePath": "/api/shipping",
+      "resources": [
+        {
+          "path": "/zones",
+          "methods": ["GET", "POST"],
+          "description": "Retrieve or create shipping zones",
+          "impactedTables": ["shipping_zones"]
+        },
+        {
+          "path": "/zones/{uid}/methods",
+          "methods": ["GET", "POST"],
+          "description": "Retrieve or create shipping methods for a zone",
+          "impactedTables": ["shipping_methods"]
+        }
+      ]
+    },
+    {
+      "name": "Plugins",
+      "basePath": "/api/plugins",
+      "resources": [
+        {
+          "path": "/",
+          "methods": ["GET", "POST"],
+          "description": "List all plugins or install a new plugin",
+          "impactedTables": ["plugins"]
+        },
+        {
+          "path": "/{uid}",
+          "methods": ["GET", "PUT", "DELETE"],
+          "description": "Get, update, or delete a specific plugin",
+          "impactedTables": ["plugins"]
+        }
+      ]
+    },
+    {
+      "name": "Webhooks",
+      "basePath": "/api/webhooks",
+      "resources": [
+        {
+          "path": "/",
+          "methods": ["GET", "POST"],
+          "description": "List all webhooks or create a new webhook",
+          "impactedTables": ["webhooks"]
+        },
+        {
+          "path": "/{uid}",
+          "methods": ["GET", "PUT", "DELETE"],
+          "description": "Get, update, or delete a specific webhook",
+          "impactedTables": ["webhooks"]
+        }
+      ]
+    },
+    {
+      "path": "/api/categories",
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "description": "CRUD operations for product categories",
+      "impactedTables": [
+        "categories"
+      ]
+    },
+    {
+      "path": "/api/tags",
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "description": "CRUD operations for product tags",
+      "impactedTables": [
+        "tags"
+      ]
+    },
+    {
+      "path": "/api/orders/{order_uid}/refunds",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "description": "Retrieve or create refund requests for an order",
+      "impactedTables": [
+        "refunds"
+      ]
+    },
+    {
+      "path": "/api/orders/{order_uid}/returns",
+      "methods": [
+        "GET",
+        "POST"
+      ],
+      "description": "Retrieve or create return requests for an order",
+      "impactedTables": [
+        "return_requests",
+        "return_items"
+      ]
+    },
+    {
+      "path": "/api/customer-groups",
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "description": "CRUD operations for customer groups",
+      "impactedTables": [
+        "customer_groups",
+        "user_customer_groups",
+        "product_customer_group_prices"
+      ]
+    },
+    {
+      "path": "/api/store",
+      "methods": [
+        "GET",
+        "PUT"
+      ],
+      "description": "Retrieve or update store-wide settings",
+      "impactedTables": [
+        "store_settings"
+      ]
+    },
+    {
+      "path": "/api/abandoned-carts",
+      "methods": [
+        "GET"
+      ],
+      "description": "Retrieve abandoned cart data",
+      "impactedTables": [
+        "abandoned_carts"
+      ]
+    }
+  ]
+}
